@@ -5,9 +5,10 @@ import { Activity } from '../../../app/models/activity'
 interface Props {
     closeForm: ()=> void;
     activity: Activity | undefined;
+    createOrEdit: (activity: Activity) => (void);
 }
 
-export default function ActivityForm({activity: selectedActivity,closeForm}: Props) {
+export default function ActivityForm({activity: selectedActivity,closeForm,createOrEdit}: Props) {
     const initialState = selectedActivity ?? {
         id: '',
         title: '',
@@ -21,7 +22,7 @@ export default function ActivityForm({activity: selectedActivity,closeForm}: Pro
     const [activity, setActivity] = useState(initialState)
 
     function handleSubmit() {
-        console.log(activity)
+        createOrEdit(activity)
     }
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
@@ -30,7 +31,7 @@ export default function ActivityForm({activity: selectedActivity,closeForm}: Pro
     }
 
     return(
-        <Segment clearing>
+        <Segment clearing fixed>
             <Form onSubmit={handleSubmit} autoComplete='off'>
                 <Form.Input placeholder='Title' name="title" value={activity.title} onChange={handleInputChange}/>
                 <Form.TextArea placeholder='Description' name="description" value={activity.description} onChange={handleInputChange}/>
