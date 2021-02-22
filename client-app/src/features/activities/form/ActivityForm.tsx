@@ -1,11 +1,10 @@
 import { observer } from 'mobx-react-lite'
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
-import { Button, FormField, Label, Segment } from 'semantic-ui-react'
+import { Button, Segment } from 'semantic-ui-react'
 import LoadingComponents from '../../../app/layout/LoadingComponents'
 import { useStore } from '../../../app/stores/store'
-import {v4 as uuid} from 'uuid'
-import { Formik, Form, ErrorMessage } from 'formik'
+import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import MyTextInput from '../../../app/common/form/MyTextInput'
 import MyTextArea from '../../../app/common/form/MyTextArea'
@@ -17,7 +16,7 @@ import { Activity } from '../../../app/models/activity'
 export default observer(function ActivityForm() {
     const history = useHistory()
     const {activityStore} = useStore()
-    const {loadActivity, createActivity, updateActivity, loading, loadingInitial} = activityStore
+    const {loadActivity, loading, loadingInitial} = activityStore
     const {id} = useParams<{id: string}>()
     const [activity, setActivity] = useState<Activity>({
         id: '',
