@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Container} from 'semantic-ui-react';
+import { Container, Modal} from 'semantic-ui-react';
 import NavBar from './NavBar';
 import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
 import { observer } from 'mobx-react-lite';
@@ -14,6 +14,7 @@ import ServerError from '../../features/errors/ServerError';
 import LoginForm from '../../features/users/LoginForm';
 import { useStore } from '../stores/store';
 import LoadingComponents from './LoadingComponents';
+import ModalContainer from '../common/modals/ModalContainer';
 
 function App() {
   const location = useLocation()
@@ -30,6 +31,7 @@ function App() {
   return (
     <>
       <ToastContainer position='bottom-right' hideProgressBar />
+      <ModalContainer />
       <Route exact path='/' component={HomePage}/>
       <Route
       path={'/(.+)'}

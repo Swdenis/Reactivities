@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { history } from "../..";
 import agent from "../api/agent";
 import { User, UserFormValues } from "../models/user";
+import modalStore from "./modalStore";
 import { store } from "./store";
 
 export default class UserStore {
@@ -22,8 +23,8 @@ export default class UserStore {
             runInAction(
                 ()=>this.user=user
             )
+            store.modalStore.closeModal()
             history.push('/activities')
-
         }
         catch(error) {
             throw error 
