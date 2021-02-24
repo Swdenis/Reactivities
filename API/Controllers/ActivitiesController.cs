@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace API.Controllers
-{
+{   [AllowAnonymous]
     public class ActivitiesController : BaseAPIController
     { 
 
