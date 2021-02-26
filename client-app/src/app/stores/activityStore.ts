@@ -3,6 +3,7 @@ import { act } from "react-dom/test-utils";
 import agent from "../api/agent";
 import { Activity } from "../models/activity";
 import {format} from 'date-fns'
+import { store } from "./store";
 
 export default class ActivityStore{
     activityRegistry = new Map<string, Activity>()
@@ -21,7 +22,7 @@ export default class ActivityStore{
 
     get groupedActivities() {
         return Object.entries(
-            this.activitiesByDate.reduce((activities,activity)=>{
+            this.activitiesByDate.reduce((activities,activity)=>{ 
                 const date = format(activity.date!, 'dd MMM yyyy')
                 activities[date] = activities[date] ? [...activities[date], activity] : [activity]
                 return activities
@@ -30,6 +31,12 @@ export default class ActivityStore{
     }
 
     private setActivity = (activity: Activity) => {
+        const user = store.userStore.user
+        if(user) {
+            activity.isGoing = activity.attendees!.some(a => a.username === user.username)
+            activity.isHost = activity.hostUsername === user.username
+            activity.host = activity.attendees?.find(x => x.username === activity.hostUsername)
+        }
         activity.date = new Date(activity.date!)
         this.activityRegistry.set(activity.id,activity)
     }
