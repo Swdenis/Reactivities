@@ -44,7 +44,7 @@ namespace Application.Photos
                     Id = PhotoUploadResult.PublicId
                 };
 
-                if(user.Photos.Any(x=> x.IsMain)) photo.IsMain = true;
+                if(!user.Photos.Any(x=> x.IsMain)) photo.IsMain = true;
                 user.Photos.Add(photo);
 
                 var result = await _context.SaveChangesAsync() > 0;
