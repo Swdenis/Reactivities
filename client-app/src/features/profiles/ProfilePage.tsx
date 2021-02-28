@@ -1,16 +1,30 @@
-import React from 'react'
+import { observer } from 'mobx-react-lite'
+import React, { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { Grid } from 'semantic-ui-react'
+import LoadingComponents from '../../app/layout/LoadingComponents'
+import { useStore } from '../../app/stores/store'
 import ProfileContent from './ProfileContent'
 import ProfileHeader from './ProfileHeader'
 
-export default function ProfilePage() 
-{
+export default observer(function ProfilePage() 
+{   const {username} = useParams<{username: string}>()
+    const {profileStore} = useStore()
+    const {profile,loadProfile, loadingProfile} = profileStore
+
+    useEffect(()=>{
+        loadProfile(username)
+    },[loadProfile,username])
+
+    if(loadingProfile) return <LoadingComponents content="Loading profile" />
+
     return(
         <Grid>
             <Grid.Column width={16}>
-                <ProfileHeader />
+                {profile &&
+                <ProfileHeader profile={profile}/>}
                 <ProfileContent />
             </Grid.Column>
         </Grid>
     )
-}   
+})
