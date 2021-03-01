@@ -9,7 +9,7 @@ interface Props{
 }
 
 export default observer(function ProfilePhotos({profile}: Props)
-{   const {profileStore: {isCurrentUser, uploadPhoto, uploading, loading, setMainPhoto}} = useStore()
+{   const {profileStore: {isCurrentUser, uploadPhoto, uploading, loading, setMainPhoto, deletePhoto}} = useStore()
     const [addPhotoMode, setAddPhotoMode] = useState(false)
     const [target, setTarget] = useState('')
     
@@ -21,6 +21,12 @@ export default observer(function ProfilePhotos({profile}: Props)
         setTarget(e.currentTarget.name)
         setMainPhoto(photo)
     }
+
+    function handlePhotoDelete(photo: Photo, e: SyntheticEvent<HTMLButtonElement>) {
+        setTarget(e.currentTarget.name)
+        deletePhoto(photo)
+    }
+
     return(
         <Tab.Pane>
             <Grid>
@@ -49,15 +55,19 @@ export default observer(function ProfilePhotos({profile}: Props)
                                         basic
                                         color='green'
                                         content='Main'
-                                        name={photo.id}
+                                        name={'main' + photo.id}
                                         disabled={photo.isMain}
                                         onClick={e=>handleSetMainPhoto(photo,e)}
-                                        loading={target === photo.id && loading}
+                                        loading={target === 'main' + photo.id && loading}
                                         />
                                         <Button 
                                         basic
                                         color='red'
                                         icon='trash'
+                                        name={photo.id}
+                                        disabled={photo.isMain}
+                                        onClick={e=>handlePhotoDelete(photo,e)}
+                                        loading={target === photo.id && loading}
                                         />
                                     </Button.Group>}
                                 </Card>))}      
