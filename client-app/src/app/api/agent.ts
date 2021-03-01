@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from 'axios'
+import { request } from 'http'
 import { toast } from 'react-toastify'
 import { history } from '../..'
 import { Activity, ActivityFormValues } from '../models/activity'
@@ -90,7 +91,9 @@ const Profiles ={
         return axios.post<Photo>('photos', formData,{
             headers: {'Content-type': 'multipart/form-data'}
         })
-    }
+    },
+    setMainPhoto: (id: string) => requests.post(`/photos/${id}/setMain`,{}),
+    deletePhoto: (id: string) => requests.delete(`/photos/${id}`)
 }
 
 const agent = {
