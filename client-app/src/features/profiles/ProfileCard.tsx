@@ -25,8 +25,8 @@ export default observer(function ProfileCrad({profile}: Props) {
             </Card.Content>
             <Card.Content extra>
                 <Icon name='user'>
-                    20 followers
-                </Icon  >
+                20 followers
+                </Icon>
             </Card.Content>
         </Card>
     ) 

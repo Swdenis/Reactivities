@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Icon, Item, Label, Segment } from 'semantic-ui-react'
+import { Button, Icon, Item, Label, Popup, Segment } from 'semantic-ui-react'
 import { Activity } from '../../../app/models/activity'
 import {format} from 'date-fns'
 import ActivityListItemAttendee from './ActivityListItemAttendee'
 import { act } from 'react-dom/test-utils'
+import ProfileCard from '../../profiles/ProfileCard'
 
 
 interface Props {
@@ -20,13 +21,21 @@ export default function ActivityListItem({activity}: Props) {
                 )}
                 <Item.Group>
                     <Item>
+                        <Popup
+                        trigger={
                         <Item.Image
                         as={Link}
                         to={`/profiles/${activity.hostUsername}`}
                         style={{marginBottom: 3}} 
                         size='tiny' 
-                        circular 
-                        src={activity.host?.image || '/assets/user.png'}/>
+                        circular
+                        src={activity.host?.image || '/assets/user.png'}
+                        />}
+                        >
+                            <Popup.Content>
+                            <ProfileCard profile = {activity.host!} />
+                            </Popup.Content>
+                        </Popup>
                         <Item.Content>
                             <Item.Header 
                             as={Link} 
