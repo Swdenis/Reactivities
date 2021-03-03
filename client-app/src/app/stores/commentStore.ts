@@ -38,7 +38,7 @@ export default class CommentStore {
             runInAction(
                 ()=> {
                     comment.createdAt= new Date(comment.createdAt)
-                    this.comments.push(comment)}
+                    this.comments.unshift(comment)}
             )
         })
         }
