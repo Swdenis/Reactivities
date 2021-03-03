@@ -40,6 +40,7 @@ namespace API.Controllers
     }
 
     [Authorize(Policy = "IsActivityHost")]
+    
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteActivity(Guid id) 
     {
