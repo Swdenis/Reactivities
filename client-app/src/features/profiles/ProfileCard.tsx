@@ -24,9 +24,8 @@ export default observer(function ProfileCrad({profile}: Props) {
                 <Card.Description>{truncate(profile.bio)}</Card.Description>
             </Card.Content>
             <Card.Content extra>
-                <Icon name='user'>
-                20 followers
-                </Icon>
+                <Icon name='user'/>
+                {profile.followersCount} followers
             </Card.Content>
         </Card>
     ) 
