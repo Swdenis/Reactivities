@@ -12,6 +12,6 @@ namespace Domain
 
         public Activity Activity { get; set; }
 
-        public DateTime MyProperty { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }
