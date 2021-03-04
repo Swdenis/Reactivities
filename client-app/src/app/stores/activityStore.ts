@@ -1,10 +1,10 @@
 import {makeAutoObservable, runInAction} from "mobx"
-import { act } from "react-dom/test-utils";
 import agent from "../api/agent";
 import { Activity, ActivityFormValues } from "../models/activity";
 import {format} from 'date-fns'
 import { store } from "./store";
 import { Profile } from "../models/profile";
+import { Pagination } from "../models/pagination";
 
 export default class ActivityStore{
     activityRegistry = new Map<string, Activity>()
@@ -12,6 +12,7 @@ export default class ActivityStore{
     editMode : boolean = false
     loading: boolean = false
     loadingInitial: boolean = false
+    pagination: Pagination | null = null
 
     constructor() {
         makeAutoObservable(this)
@@ -72,12 +73,13 @@ export default class ActivityStore{
     loadActivities = async () => {
         this.loadingInitial = true
         try {
-            const activities = await agent.Activities.list()
-                activities.forEach(activity => {
+            const result = await agent.Activities.list()
+                result.data.forEach(activity => {
                 this.setActivity(activity)
                     
             }   
             )
+            this.setPagination(result.pagination)
             this.setLoadingInitial(false)
         }
         catch (error) {
@@ -85,6 +87,10 @@ export default class ActivityStore{
             this.setLoadingInitial(false)
             
         }
+    }
+
+    setPagination = (pagination: Pagination) => {
+        this.pagination = pagination
     }
 
     setLoadingInitial = (state: boolean) => {
