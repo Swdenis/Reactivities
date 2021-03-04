@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import React, { useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
-import { Button, Grid, Loader } from 'semantic-ui-react'
+import { Grid, Loader } from 'semantic-ui-react'
 import LoadingComponents from '../../../app/layout/LoadingComponents'
 import { PagingParams } from '../../../app/models/pagination'
 import { useStore } from '../../../app/stores/store'
