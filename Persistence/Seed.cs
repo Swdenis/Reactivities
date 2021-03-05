@@ -18,9 +18,9 @@ namespace Persistence
                 {
                     new AppUser
                     {
-                        DisplayName = "Bob",
-                        UserName = "bob",
-                        Email = "bob@test.com"
+                        DisplayName = "Ben",
+                        UserName = "ben",
+                        Email = "ben@test.com"
                     },
                     new AppUser
                     {
