@@ -22,10 +22,13 @@ function App() {
 
   const {commonStore, userStore} = useStore()
 
-  useEffect(()=>{
-    if(commonStore.token) {userStore.getUser().finally(()=> commonStore.setApploaded())}
-    else {commonStore.setApploaded()}
-  }, [commonStore, userStore]) 
+  useEffect(() => {
+    if (commonStore.token) {
+      userStore.getUser().finally(() => commonStore.setApploaded());
+    } else {
+      userStore.getFacebookLoginStatus().then(() => commonStore.setApploaded());
+    }
+  }, [commonStore, userStore])
 
   if(!commonStore.appLoaded) return <LoadingComponents content="Loading app" />
 
