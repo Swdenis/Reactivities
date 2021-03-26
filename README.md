@@ -5,6 +5,6 @@ A social network web-app, that combines a front-end on React and back-end on C#.
 #
 For access use:
 <br/>
-username: Test,
+email: guest@test.com;
 <br/>
 password: Pa$$w0rd
